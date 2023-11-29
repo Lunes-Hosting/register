@@ -12,6 +12,7 @@ import requests
 import json
 from cloudflare import *
 from config import *
+from security import safe_requests
 
 class Cloudflare:
     def __init__(self, api_token, account_id, zone_id):
@@ -28,7 +29,7 @@ class Cloudflare:
         print(self.ZONE_ID)
         url = f"https://api.cloudflare.com/client/v4/zones/{self.ZONE_ID}/dns_records"
 
-        response = requests.get(url, headers=self.headers)
+        response = safe_requests.get(url, headers=self.headers)
 
         if response.status_code == 200:
             print(response.text)
