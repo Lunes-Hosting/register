@@ -65,13 +65,13 @@ class Cloudflare:
     
     def delete(self, identifier):
         url = f"https://api.cloudflare.com/client/v4/zones/{self.ZONE_ID}/dns_records/{identifier}"
-        response = requests.delete(url, headers=self.headers)
+        response = requests.delete(url, headers=self.headers, timeout=60)
 
         return response
     
     def execute(self, dns_record_data): #for post
         url = f"https://api.cloudflare.com/client/v4/zones/{self.ZONE_ID}/dns_records"
-        response = requests.post(url, headers=self.headers, data=json.dumps(dns_record_data))
+        response = requests.post(url, headers=self.headers, data=json.dumps(dns_record_data), timeout=60)
 
         return response
         
